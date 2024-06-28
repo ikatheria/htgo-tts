@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/hajimehoshi/go-mp3"
-	"github.com/hajimehoshi/oto/v2"
+	"github.com/ikatheria/go-mp3"
+	"github.com/ikatheria/oto/v3"
 )
 
 type Native struct {

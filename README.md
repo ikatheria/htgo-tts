@@ -8,23 +8,23 @@
 
 ### Install
 ```
-go get "github.com/hegedustibor/htgo-tts"
+go get "github.com/ikatheria/htgo-tts"
 ```
 
 ### Update
 ```
-go get -u "github.com/hegedustibor/htgo-tts"
+go get -u "github.com/ikatheria/htgo-tts"
 ```
 
 ### Remove
 ```
-go clean -i "github.com/hegedustibor/htgo-tts"
+go clean -i "github.com/ikatheria/htgo-tts"
 ```
 
 ### Import
 ```go
-import "github.com/hegedustibor/htgo-tts"
-import "github.com/hegedustibor/htgo-tts/voices"
+import "github.com/ikatheria/htgo-tts"
+import "github.com/ikatheria/htgo-tts/voices"
 ```
 
 ### Use
@@ -36,9 +36,9 @@ speech.Speak("Your sentence.")
 ### Use with Handlers
 ```go
 import (
-    htgotts "github.com/hegedustibor/htgo-tts"
-    handlers "github.com/hegedustibor/htgo-tts/handlers"
-    voices "github.com/hegedustibor/htgo-tts/voices"
+    htgotts "github.com/ikatheria/htgo-tts"
+    handlers "github.com/ikatheria/htgo-tts/handlers"
+    voices "github.com/ikatheria/htgo-tts/voices"
 )
 
 speech := htgotts.Speech{Folder: "audio", Language: voices.English, Handler: &handlers.MPlayer{}}
@@ -51,9 +51,9 @@ Note: The "Native" handler works around the Oto librery, see the ["Prerequisite"
 
 ```go
 import (
-    htgotts "github.com/hegedustibor/htgo-tts"
-    handlers "github.com/hegedustibor/htgo-tts/handlers"
-    voices "github.com/hegedustibor/htgo-tts/voices"
+    htgotts "github.com/ikatherisa/htgo-tts"
+    handlers "github.com/ikatheria/htgo-tts/handlers"
+    voices "github.com/ikatheria/htgo-tts/voices"
 )
 
 speech := htgotts.Speech{Folder: "audio", Language: voices.English, Handler: &handlers.Native{}}
@@ -63,9 +63,9 @@ speech.Speak("Your sentence.")
 ### Use with Proxy
 ```go
 import (
-    htgotts "github.com/hegedustibor/htgo-tts"
-    handlers "github.com/hegedustibor/htgo-tts/handlers"
-    voices "github.com/hegedustibor/htgo-tts/voices"
+    htgotts "github.com/ikatheria/htgo-tts"
+    handlers "github.com/ikatheria/htgo-tts/handlers"
+    voices "github.com/ikatheria/htgo-tts/voices"
 )
 
 speech := htgotts.Speech{Folder: "audio", Language: voices.English, Proxy: "https://..."}
