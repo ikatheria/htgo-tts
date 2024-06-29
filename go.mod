@@ -3,7 +3,7 @@ module github.com/ikatheria/htgo-tts
 go 1.22
 
 require (
-	github.com/ikatheria/go-mp3 v1.0.0
+	github.com/ikatheria/go-mp3 v1.0.1
 	github.com/ikatheria/oto/v2 v2.2.3
 )
 
