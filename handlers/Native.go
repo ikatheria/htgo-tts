@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/ikatheria/go-mp3"
-	"github.com/ikatheria/oto/v3"
+	"github.com/ikatheria/oto/v2"
 )
 
 type Native struct {
