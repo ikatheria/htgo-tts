@@ -21,31 +21,30 @@ func (n *Native) Play(fileName string) error {
 
 	fileBytesReader := bytes.NewReader(fileBytes)
 
-	// Decode file
+	// Decode MP3 file
 	decodedMp3, err := mp3.NewDecoder(fileBytesReader)
 	if err != nil {
 		return err
 	}
 
-	// Set audio parameters
-	options := oto.NewContextOptions()
-	options.SampleRate = decodedMp3.SampleRate()
-	options.NumChannels = 2
-	options.BitDepth = 2
-
-	otoCtx, readyChan, err := oto.NewContext(options)
+	// Create new audio context
+	otoCtx, err := oto.NewContext(oto.WithSR(decodedMp3.SampleRate()), oto.WithChannels(2), oto.WithBitDepth(16))
 	if err != nil {
 		return err
 	}
-	<-readyChan
 
-	player := otoCtx.NewPlayer(decodedMp3)
+	// Create a new player
+	player := otoCtx.NewPlayer()
 
-	player.Play()
+	// Start playing
+	player.Write(decodedMp3)
 
-	for player.IsPlaying() {
-		time.Sleep(time.Millisecond)
-	}
+	// Wait for the player to finish
+	time.Sleep(decodedMp3.Duration())
 
-	return player.Close()
+	// Close the player and context
+	player.Close()
+	otoCtx.Close()
+
+	return nil
 }
