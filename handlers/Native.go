@@ -27,10 +27,13 @@ func (n *Native) Play(fileName string) error {
 		return err
 	}
 
-	numOfChannels := 2
-	audioBitDepth := 2
+	// Set audio parameters
+	options := oto.NewContextOptions()
+	options.SampleRate = decodedMp3.SampleRate()
+	options.NumChannels = 2
+	options.BitDepth = 2
 
-	otoCtx, readyChan, err := oto.NewContext(decodedMp3.SampleRate(), numOfChannels, audioBitDepth)
+	otoCtx, readyChan, err := oto.NewContext(options)
 	if err != nil {
 		return err
 	}
