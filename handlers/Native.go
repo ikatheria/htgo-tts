@@ -27,8 +27,12 @@ func (n *Native) Play(fileName string) error {
 		return err
 	}
 
+	// Calculate duration
+	duration := float64(decodedMp3.Length()) / float64(decodedMp3.SampleRate()) / float64(decodedMp3.BitRate()/8)
+	durationInDuration := time.Duration(duration) * time.Second
+
 	// Create new audio context
-	otoCtx, err := oto.NewContext(oto.WithSR(decodedMp3.SampleRate()), oto.WithChannels(2), oto.WithBitDepth(16))
+	otoCtx, _, err := oto.NewContext(44100, 2, 2, 8192) // Adjust these values as per oto library's requirements
 	if err != nil {
 		return err
 	}
@@ -37,10 +41,17 @@ func (n *Native) Play(fileName string) error {
 	player := otoCtx.NewPlayer()
 
 	// Start playing
-	player.Write(decodedMp3)
+	buffer := make([]byte, 8192)
+	for {
+		_, err := decodedMp3.Read(buffer)
+		if err != nil {
+			break
+		}
+		player.Write(buffer)
+	}
 
 	// Wait for the player to finish
-	time.Sleep(decodedMp3.Duration())
+	time.Sleep(durationInDuration)
 
 	// Close the player and context
 	player.Close()
